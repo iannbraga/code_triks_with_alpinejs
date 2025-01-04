@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Orçamento Doméstico</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <div class="container py-5" x-data="orcamento()">
+        <h1 class="text-center mb-4">Simulador de Orçamento Doméstico</h1>
+        
+        <!-- Formulário -->
+        <div class="mb-4">
+            <h3>Adicionar Receita ou Despesa</h3>
+            <form @submit.prevent="adicionarItem()">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-4">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <input type="text" id="descricao" class="form-control" x-model="novoItem.descricao" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="valor" class="form-label">Valor (R$)</label>
+                        <input type="number" id="valor" class="form-control" x-model.number="novoItem.valor" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="tipo" class="form-label">Tipo</label>
+                        <select id="tipo" class="form-select" x-model="novoItem.tipo" required>
+                            <option value="receita">Receita</option>
+                            <option value="despesa">Despesa</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-grid">
+                        <button type="submit" class="btn btn-primary mt-3">Adicionar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Resumo -->
+        <div class="mb-4">
+            <h3>Resumo</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="p-3 border rounded bg-light">
+                        <h5>Total de Receitas</h5>
+                        <p class="fs-4 text-success">R$ <span x-text="totalReceitas.toFixed(2)"></span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border rounded bg-light">
+                        <h5>Total de Despesas</h5>
+                        <p class="fs-4 text-danger">R$ <span x-text="totalDespesas.toFixed(2)"></span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border rounded bg-light">
+                        <h5>Saldo</h5>
+                        <p :class="saldo >= 0 ? 'text-success' : 'text-danger'" class="fs-4">R$ <span x-text="saldo.toFixed(2)"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela de Itens -->
+        <div class="mb-4">
+            <h3>Detalhes</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor (R$)</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template x-for="(item, index) in itens" :key="index">
+                        <tr>
+                            <td x-text="item.descricao"></td>
+                            <td x-text="item.valor.toFixed(2)"></td>
+                            <td x-text="item.tipo === 'receita' ? 'Receita' : 'Despesa'"></td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" @click="removerItem(index)">Remover</button>
+                            </td>
+                        </tr>
+                    </template>
+                    <tr x-show="itens.length === 0">
+                        <td colspan="4" class="text-center">Nenhum item cadastrado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script JS -->
+    <script src="script.js"></script>
+</body>
+</html>
