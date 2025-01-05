@@ -100,6 +100,14 @@
 
 ---
 
+### **81. Simulador de Efeitos Sonoros**
+- **Descrição:** O usuário clica em ícones e escuta diferentes efeitos sonoros (ex.: trovão, aplausos).
+- **Arquivos:**
+  1. **index.html** - Botões com ícones para cada som.
+  2. **script.js** - Lógica para tocar os sons ao clique.
+
+---
+
 ### **14. Calculadora Básica**
 - **Descrição:** Uma calculadora simples com operações matemáticas básicas.
 - **Arquivos:**
@@ -658,14 +666,6 @@
 
 ---
 
-### **81. Simulador de Efeitos Sonoros**
-- **Descrição:** O usuário clica em ícones e escuta diferentes efeitos sonoros (ex.: trovão, aplausos).
-- **Arquivos:**
-  1. **index.html** - Botões com ícones para cada som.
-  2. **script.js** - Lógica para tocar os sons ao clique.
-
----
-
 ### **82. Conversor de Temperatura**
 - **Descrição:** Permite converter entre Celsius, Fahrenheit e Kelvin.
 - **Arquivos:**
@@ -701,14 +701,6 @@
 
 ---
 
-### **86. Simulador de Barba Virtual**
-- **Descrição:** O usuário faz upload de uma foto, e diferentes estilos de barba são aplicados.
-- **Arquivos:**
-  1. **index.html** - Campo para upload e botões de estilos.
-  2. **script.js** - Lógica para sobrepor estilos na imagem.
-
----
-
 ### **87. Criador de Gifs com Texto**
 - **Descrição:** Gera pequenos gifs animados com textos personalizados.
 - **Arquivos:**
@@ -730,14 +722,6 @@
 - **Arquivos:**
   1. **index.html** - Campos para inserir os nomes.
   2. **script.js** - Lógica para calcular uma pontuação fictícia.
-
----
-
-### **90. Efeito de Texto com Digitação**
-- **Descrição:** Simula um efeito de texto sendo digitado letra por letra.
-- **Arquivos:**
-  1. **index.html** - Display do texto.
-  2. **script.js** - Lógica para o efeito de digitação.
 
 ---
 
@@ -772,14 +756,6 @@
   1. **index.html** - Estrutura do jogo.
   2. **style.css** - Estilo dos alvos.
   3. **script.js** - Lógica para movimento e pontuação.
-
----
-
-### **95. Gerador de Senhas**
-- **Descrição:** Cria senhas seguras com base nas preferências do usuário.
-- **Arquivos:**
-  1. **index.html** - Configurações para personalizar a senha.
-  2. **script.js** - Lógica para gerar senhas.
 
 ---
 
