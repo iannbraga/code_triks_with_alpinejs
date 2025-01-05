@@ -52,7 +52,7 @@
 ---
 
 ### **8. Simulador de Sorteio**
-- **Descrição:** Sorteia um número entre 1 e 100 ou entre uma faixa personalizada.
+- **Descrição:** Sorteia um número entre 1 e 100 ou entre uma faixa personalizada, ou uma lista de nomes.
 - **Arquivos:**
   1. **index.html** - Entrada de faixa e botão para sortear.
   2. **script.js** - Função para gerar o número aleatório.
