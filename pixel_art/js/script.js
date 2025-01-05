@@ -4,7 +4,14 @@ function pixelArtApp() {
         cols: 16,
         currentColor: '#000000',
         canvas: null,
-        cellColors: [], // Array para armazenar as cores de cada célula
+        cellColors: [],
+        isEraser: false, // Estado para determinar o modo ativo
+        palette: [
+            '#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF',
+            '#FFFF00', '#FF00FF', '#00FFFF', '#800000', '#808000',
+            '#008000', '#800080', '#808080', '#C0C0C0', '#FFA500',
+            '#A52A2A', '#8B4513', '#40E0D0', '#6495ED', '#DC143C',
+        ],
 
         generateGrid() {
             if (this.canvas) {
@@ -25,7 +32,6 @@ function pixelArtApp() {
                 };
 
                 p.draw = () => {
-                    // Desenha a grade e preenche com as cores armazenadas
                     for (let i = 0; i < this.cols; i++) {
                         for (let j = 0; j < this.rows; j++) {
                             p.fill(this.cellColors[j][i]);
@@ -40,19 +46,17 @@ function pixelArtApp() {
         },
 
         fillCell(p, cellSize) {
-            // Calcula a posição da célula clicada
             const col = Math.floor(p.mouseX / cellSize);
             const row = Math.floor(p.mouseY / cellSize);
 
-            // Verifica se está dentro dos limites do canvas
             if (col >= 0 && row >= 0 && col < this.cols && row < this.rows) {
-                this.cellColors[row][col] = this.currentColor; // Atualiza a cor da célula
-                p.redraw(); // Redesenha apenas a parte alterada
+                const color = this.isEraser ? '#FFFFFF' : this.currentColor;
+                this.cellColors[row][col] = color; // Atualiza a cor
+                p.redraw();
             }
         },
 
         clearGrid() {
-            // Redefine todas as células para a cor branca
             this.cellColors = Array.from({ length: this.rows }, () => Array(this.cols).fill('#FFFFFF'));
             if (this.canvas) {
                 this.canvas.redraw();
@@ -63,6 +67,19 @@ function pixelArtApp() {
             if (this.canvas) {
                 this.canvas.saveCanvas('pixel-art', 'png');
             }
+        },
+
+        activateEraser() {
+            this.isEraser = true;
+        },
+
+        activateDrawing() {
+            this.isEraser = false;
+        },
+
+        selectColor(color) {
+            this.currentColor = color;
+            this.isEraser = false; // Sai do modo borracha ao selecionar uma cor
         },
     };
 }
