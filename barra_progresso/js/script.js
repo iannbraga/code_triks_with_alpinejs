@@ -15,7 +15,7 @@ function barraProgresso() {
                     clearInterval(this.intervalo); // Para a animação quando atinge 100%
                     this.animando = false;
                 }
-            }, 50); // Atualiza o progresso a cada 50ms
+            }, 100); // Atualiza o progresso a cada 100ms
         },
 
         resetarProgresso() {
