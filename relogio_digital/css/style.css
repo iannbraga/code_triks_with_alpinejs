@@ -1,0 +1,43 @@
+/* Carregar a fonte Courier New (ou outra fonte estilo código) */
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+/* Estiliza o corpo da página */
+body {
+    background-color: #121212; /* Fundo escuro */
+    color: white;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estiliza o relógio digital */
+#relogio {
+    font-family: 'Courier Prime', monospace; /* Fonte estilo código */
+    font-size: 6rem; /* Tamanho grande para o relógio */
+    color: #a0d0ff; /* Cor suave entre branco e azul claro */
+    padding: 20px 60px;
+    text-align: center;
+    display: inline-block;
+    letter-spacing: 10px; /* Espaçamento entre os caracteres */
+}
+
+/* Estiliza a data */
+#data {
+    font-family: 'Courier Prime', monospace; /* Mesma fonte estilo código */
+    font-size: 2.5rem; /* Tamanho menor para a data */
+    color: #a0d0ff; /* Cor suave entre branco e azul claro */
+    margin-bottom: 10px; /* Espaçamento entre a data e a hora */
+}
+
+/* Responsividade para ajustar o tamanho da fonte */
+@media (max-width: 768px) {
+    #relogio {
+        font-size: 4rem; /* Menor em telas menores */
+    }
+
+    #data {
+        font-size: 2rem; /* Ajuste o tamanho da data para telas menores */
+    }
+}
