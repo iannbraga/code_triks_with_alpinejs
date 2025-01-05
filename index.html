@@ -9,23 +9,20 @@
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 </head>
 <body>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Projetos</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav" x-data="{ projetos: [] }" x-init="fetch('js/projetos.json').then(res => res.json()).then(data => projetos = data)">
-      <ul class="navbar-nav">
-        <template x-for="projeto in projetos" :key="projeto.nome">
-          <li class="nav-item">
-            <a class="nav-link" :href="projeto.link" x-text="projeto.nome"></a>
-          </li>
-        </template>
-      </ul>
+   <!-- Container de Cards -->
+   <div class="container my-5">
+    <div class="row" x-data="{ projetos: [] }" x-init="fetch('js/projetos.json').then(res => res.json()).then(data => projetos = data)">
+      <!-- Cards -->
+      <template x-for="projeto in projetos" :key="projeto.nome" class="col-md-6 mb-4">
+        <div class="card m-2" style="width: 500px;height: 130px;">
+          <div class="card-body text-center">
+            <h5 class="card-title" x-text="projeto.nome"></h5>
+            <a :href="projeto.link" class="btn btn-primary">Acessar Projeto</a>
+          </div>
+        </div>
+      </template>
     </div>
-  </nav>
+  </div>
 
   <!-- Link para o Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
