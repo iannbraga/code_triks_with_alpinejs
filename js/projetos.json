@@ -1,16 +1,10 @@
 [
-    { "nome": "Barra de Progresso", "link": "barra_progresso/index.html" },
     { "nome": "Contador de Caracteres", "link": "contador_caracteres/index.html" },
-    { "nome": "Conversor de Temperatura", "link": "conversor_temperatura/index.html" },
     { "nome": "Cronômetro", "link": "cronometro/index.html" },
     { "nome": "Digitador", "link": "digitador/index.html" },
     { "nome": "Gerador de Senhas", "link": "gerador_senhas/index.html" },
-    { "nome": "Jogo Pedra, Papel e Tesoura", "link": "jogo_pedra_papel_tesoura/index.html" },
-    { "nome": "Quiz", "link": "quiz/index.html" },
     { "nome": "Relógio Digital", "link": "relogio_digital/index.html" },
     { "nome": "Semáforo", "link": "semaforo/index.html" },
-    { "nome": "Simulador de Dados", "link": "simulador_dados/index.html" },
-    { "nome": "Simulador de Efeitos Sonoros", "link": "simulador_efeitos_sonoros/index.html" },
-    { "nome": "Simulador de Sorteio", "link": "simulador_sorteio/index.html" }
+    { "nome": "Simulador de Dados", "link": "simulador_dados/index.html" }
   ]
   
