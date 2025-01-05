@@ -34,14 +34,6 @@
 
 ---
 
-### **5. Gerador de Cores Aleatórias**
-- **Descrição:** Mostra uma cor aleatória e seu código hexadecimal ao clicar em um botão.
-- **Arquivos:**
-  1. **index.html** - Botão e div para mostrar a cor.
-  2. **script.js** - Função para gerar e aplicar cores.
-
----
-
 ### **6. Cronômetro**
 - **Descrição:** Um cronômetro simples com botões para iniciar, pausar e resetar.
 - **Arquivos:**
