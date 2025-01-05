@@ -1,11 +1,14 @@
-// Função para gerar uma senha segura
 function gerarSenha() {
     const comprimento = document.getElementById("comprimento").value;
     const incluirNumeros = document.getElementById("numeros").checked;
     const incluirLetras = document.getElementById("letras").checked;
     const incluirEspeciais = document.getElementById("especiais").checked;
-    const descricao = document.getElementById("descricao").value;
-    const caracteresRemover = document.getElementById("caracteres-remover").value.split(" ").join(""); // Remove espaços extras
+    let descricao = document.getElementById("descricao").value;
+    const caracteresRemover = document.getElementById("caracteres-remover").value.split(" ").join("");
+
+    if (!descricao.trim()) {
+        descricao = "Sem descrição";
+    }
 
     let caracteres = "";
 
@@ -21,27 +24,21 @@ function gerarSenha() {
         caracteres += "!@#$%^&*()-_=+[]{}|;:,.<>?/~";
     }
 
-    // Geração da senha
     let senha = "";
     for (let i = 0; i < comprimento; i++) {
         const randomIndex = Math.floor(Math.random() * caracteres.length);
         senha += caracteres[randomIndex];
     }
 
-    // Remover caracteres indesejados
     for (let char of caracteresRemover) {
         senha = senha.replace(char, "");
     }
-
-    // Exibir a senha gerada
     document.getElementById("senha-gerada").textContent = senha;
 
-    // Salvar a senha gerada e as configurações no localStorage
     salvarConfiguracoes(descricao, comprimento, caracteresRemover, incluirNumeros, incluirLetras, incluirEspeciais);
     salvarSenha(descricao, senha);
 }
 
-// Função para salvar a senha gerada no localStorage
 function salvarSenha(descricao, senha) {
     let senhas = JSON.parse(localStorage.getItem("senhas")) || [];
     senhas.push({ descricao, senha });
@@ -49,7 +46,6 @@ function salvarSenha(descricao, senha) {
     atualizarListaSenhas();
 }
 
-// Função para salvar as configurações no localStorage
 function salvarConfiguracoes(descricao, comprimento, caracteresRemover, incluirNumeros, incluirLetras, incluirEspeciais) {
     const configuracoes = {
         descricao,
@@ -62,7 +58,6 @@ function salvarConfiguracoes(descricao, comprimento, caracteresRemover, incluirN
     localStorage.setItem("configuracoes", JSON.stringify(configuracoes));
 }
 
-// Função para carregar as configurações salvas no localStorage
 function carregarConfiguracoes() {
     const configuracoes = JSON.parse(localStorage.getItem("configuracoes"));
     if (configuracoes) {
@@ -75,7 +70,6 @@ function carregarConfiguracoes() {
     }
 }
 
-// Função para atualizar a lista de senhas salvas
 function atualizarListaSenhas() {
     const listaSenhas = JSON.parse(localStorage.getItem("senhas")) || [];
     const listaElement = document.getElementById("lista-senhas");
@@ -88,7 +82,6 @@ function atualizarListaSenhas() {
     });
 }
 
-// Função para limpar as configurações e senhas
 function limparConfiguracoes() {
     localStorage.removeItem("configuracoes");
     localStorage.removeItem("senhas");
@@ -101,14 +94,12 @@ function limparConfiguracoes() {
     atualizarListaSenhas();
 }
 
-// Função para limpar apenas as senhas
 function limparSenhas() {
     localStorage.removeItem("senhas");
     atualizarListaSenhas();
 }
 
-// Função de inicialização
-window.onload = function() {
+window.onload = function () {
     carregarConfiguracoes();
 
     document.getElementById("limpar-configuracoes").onclick = limparConfiguracoes;
