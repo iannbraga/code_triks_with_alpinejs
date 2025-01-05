@@ -3,33 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Interativo</title>
+    <title>Efeito de Texto Digitado</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh; margin: 0;">
-    <div class="container text-center bg-white p-5 rounded shadow-sm" x-data="quizInterativo()">
-        <h1 class="display-5 mb-4">Quiz Interativo</h1>
+    <div class="container text-center bg-white p-5 rounded shadow-sm" x-data="efeitoTexto()">
+        <h1 class="display-5 mb-4">Efeito de Texto Digitado</h1>
         
-        <!-- Pergunta -->
-        <div class="mb-4">
-            <p class="lead" x-text="pergunta.texto"></p>
+        <!-- Texto digitado -->
+        <div>
+            <p class="lead" x-text="textoExibido"></p>
         </div>
 
-        <!-- Opções de Resposta -->
-        <div class="mb-4">
-            <template x-for="(opcao, index) in pergunta.opcoes" :key="index">
-                <button class="btn btn-outline-primary btn-lg d-block mb-2" @click="verificarResposta(index)">
-                    <span x-text="opcao"></span>
-                </button>
-            </template>
-        </div>
-
-        <!-- Resultado -->
-        <div x-show="mensagem !== ''" class="mt-4">
-            <p class="lead fw-bold" x-text="mensagem"></p>
+        <!-- Controle de velocidade -->
+        <div class="mt-4">
+            <label for="velocidade" class="form-label">Velocidade da digitação:</label>
+            <input type="range" id="velocidade" min="1" max="1000" step="1" x-model="velocidade" class="form-range" @input="reiniciarDigitar()">
+            <p>Velocidade: <span x-text="velocidade / 100"></span> segundos por caractere</p>
         </div>
     </div>
 

@@ -1,0 +1,17 @@
+[
+    {
+        "texto": "Qual é o maior planeta do Sistema Solar?",
+        "opcoes": ["Terra", "Júpiter", "Marte"],
+        "certa": 1
+    },
+    {
+        "texto": "Qual é o elemento químico mais abundante no universo?",
+        "opcoes": ["Hélio", "Oxigênio", "Hidrogênio"],
+        "certa": 2
+    },
+    {
+        "texto": "Quantos continentes existem na Terra?",
+        "opcoes": ["5", "6", "7"],
+        "certa": 2
+    }
+]
