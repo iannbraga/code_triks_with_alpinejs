@@ -30,7 +30,7 @@
 - **Descrição:** Um jogo interativo que permite jogar contra o computador.
 - **Arquivos:**
   1. **index.html** - Botões para escolher uma opção.
-  2. **script.js** - Lógica do jogo (escolha do computador, resultado).
+  2. **js/script.js** - Lógica do jogo (escolha do computador, resultado).
 
 ---
 
