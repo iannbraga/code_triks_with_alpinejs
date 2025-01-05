@@ -91,12 +91,12 @@
 
 ---
 
-### **13. Simulador de Clima**
-- **Descrição:** Mostra um clima aleatório (ex.: Sol, Chuva, Nublado).
+### **16. Luz de Semáforo**
+- **Descrição:** Um semáforo interativo que muda de cor ao clicar em um botão.
 - **Arquivos:**
-  1. **index.html** - Botão para simular o clima.
-  2. **style.css** - Ícones do clima.
-  3. **script.js** - Lógica para escolher e exibir o clima.
+  1. **index.html** - Estrutura com círculos coloridos.
+  2. **style.css** - Estilo do semáforo.
+  3. **script.js** - Lógica para alternar as cores.
 
 ---
 
@@ -113,15 +113,6 @@
 - **Arquivos:**
   1. **index.html** - Estrutura da barra de navegação.
   2. **style.css** - Estilo e animações do menu.
-
----
-
-### **16. Luz de Semáforo**
-- **Descrição:** Um semáforo interativo que muda de cor ao clicar em um botão.
-- **Arquivos:**
-  1. **index.html** - Estrutura com círculos coloridos.
-  2. **style.css** - Estilo do semáforo.
-  3. **script.js** - Lógica para alternar as cores.
 
 ---
 

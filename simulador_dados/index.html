@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Dados</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh; margin: 0;">
+    <div class="container text-center bg-white p-5 rounded shadow-sm" x-data="simuladorDados()">
+        <h1 class="display-4 mb-4">Simulador de Dados</h1>
+
+        <button class="btn btn-primary btn-lg mb-4" @click="lançarDado()">Lançar Dado</button>
+
+        <div>
+            <h2 class="display-3" x-text="resultado !== null ? 'Resultado: ' + resultado : ''"></h2>
+        </div>
+
+        <div class="dice-container">
+            <div class="dice d-flex justify-content-center" x-show="resultado !== null">
+                <div class="first-face" x-show="resultado === 1">
+                    <span class="pip"></span>
+                </div>
+                <div class="second-face" x-show="resultado === 2">
+                    <span class="pip"></span>
+                    <span class="pip"></span>
+                </div>
+                <div class="third-face" x-show="resultado === 3">
+                    <span class="pip"></span>
+                    <span class="pip"></span>
+                    <span class="pip"></span>
+                </div>
+                <div class="fourth-face" x-show="resultado === 4">
+                    <div class="column">
+                        <span class="pip"></span>
+                        <span class="pip"></span>
+                    </div>
+                    <div class="column">
+                        <span class="pip"></span>
+                        <span class="pip"></span>
+                    </div>
+                </div>
+                <div class="fifth-face" x-show="resultado === 5">
+                    <div class="column">
+                        <span class="pip"></span>
+                        <span class="pip"></span>
+                    </div>
+                    <div class="column">
+                        <span class="pip"></span>
+                    </div>
+                    <div class="column">
+                        <span class="pip"></span>
+                        <span class="pip"></span>
+                    </div>
+                </div>
+                <div class="sixth-face" x-show="resultado === 6">
+                    <div class="column">
+                        <span class="pip"></span>
+                        <span class="pip"></span>
+                        <span class="pip"></span>
+                    </div>
+                    <div class="column">
+                        <span class="pip"></span>
+                        <span class="pip"></span>
+                        <span class="pip"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
