@@ -9,36 +9,35 @@
   <script src="js/script.js"></script>
 </head>
 <body>
-  <div x-data="chessGame()" x-init="init()">
-    <h1>Tabuleiro de Xadrez</h1>
-    <div class="board-container">
-      <div class="labels-vertical">
-        <!-- Exibir os números de 1 a 8 -->
-        <template x-for="n in 8" :key="n">
-          <div x-text="9 - n"></div>
-        </template>
-      </div>
-      <div class="board">
-        <!-- Gerar o tabuleiro -->
-        <template x-for="(row, rowIndex) in board" :key="rowIndex">
-          <div class="row">
-            <template x-for="(cell, colIndex) in row" :key="colIndex">
-              <div 
-                class="cell" 
-                :class="{'black': (rowIndex + colIndex) % 2 === 1, 'white': (rowIndex + colIndex) % 2 === 0}" 
-                x-text="cell"
-              ></div>
+    <div x-data="chessGame()" x-init="init()">
+        <h1>Tabuleiro de Xadrez</h1>
+        <div class="board-container">
+          <div class="labels-vertical">
+            <template x-for="n in 8" :key="n">
+              <div x-text="9 - n"></div>
             </template>
           </div>
-        </template>
+          <div class="board">
+            <template x-for="(row, rowIndex) in board" :key="rowIndex">
+              <div class="row">
+                <template x-for="(cell, colIndex) in row" :key="colIndex">
+                  <div 
+                    class="cell" 
+                    :class="{'black': (rowIndex + colIndex) % 2 === 1, 'white': (rowIndex + colIndex) % 2 === 0, 'selected': selectedCell && selectedCell[0] === rowIndex && selectedCell[1] === colIndex}" 
+                    x-text="cell" 
+                    @click="selectCell(rowIndex, colIndex)"
+                  ></div>
+                </template>
+              </div>
+            </template>
+          </div>
+          <div class="labels-horizontal">
+            <template x-for="letter in 'ABCDEFGH'.split('')" :key="letter">
+              <div x-text="letter"></div>
+            </template>
+          </div>
+        </div>
       </div>
-      <div class="labels-horizontal">
-        <!-- Exibir as letras de A a H -->
-        <template x-for="letter in 'ABCDEFGH'.split('')" :key="letter">
-          <div x-text="letter"></div>
-        </template>
-      </div>
-    </div>
-  </div>
+      
 </body>
 </html>

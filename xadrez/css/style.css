@@ -60,6 +60,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  .cell.selected {
+  outline: 3px solid #ffcc00;
+  outline-offset: -3px;
+}
+
   font-size: 24px;
   font-weight: bold;
   width: 100%;
@@ -72,4 +77,9 @@ h1 {
 
 .cell.white {
   background-color: #f0d9b5; /* Cor branca */
+}
+
+.cell.selected {
+  outline: 3px solid #ffcc00;
+  outline-offset: -3px;
 }
