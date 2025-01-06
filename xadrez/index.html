@@ -5,22 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tabuleiro de Xadrez</title>
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="js/script.js"></script>
 </head>
 <body>
   <div x-data="chessGame()" x-init="init()">
     <h1>Tabuleiro de Xadrez</h1>
-    <div class="board">
-      <!-- Loop para criar o tabuleiro -->
-      <template x-for="(row, rowIndex) in board" :key="rowIndex">
-        <div class="row">
-          <template x-for="(cell, colIndex) in row" :key="colIndex">
-            <div class="cell" x-text="cell"></div>
-          </template>
-        </div>
-      </template>
+    <div class="board-container">
+      <div class="labels-vertical">
+        <!-- Exibir os números de 1 a 8 -->
+        <template x-for="n in 8" :key="n">
+          <div x-text="9 - n"></div>
+        </template>
+      </div>
+      <div class="board">
+        <!-- Gerar o tabuleiro -->
+        <template x-for="(row, rowIndex) in board" :key="rowIndex">
+          <div class="row">
+            <template x-for="(cell, colIndex) in row" :key="colIndex">
+              <div 
+                class="cell" 
+                :class="{'black': (rowIndex + colIndex) % 2 === 1, 'white': (rowIndex + colIndex) % 2 === 0}" 
+                x-text="cell"
+              ></div>
+            </template>
+          </div>
+        </template>
+      </div>
+      <div class="labels-horizontal">
+        <!-- Exibir as letras de A a H -->
+        <template x-for="letter in 'ABCDEFGH'.split('')" :key="letter">
+          <div x-text="letter"></div>
+        </template>
+      </div>
     </div>
   </div>
-  <script src="js/script.js"></script>
 </body>
 </html>
