@@ -1,4 +1,5 @@
 [
+  { "nome": "Xadrez", "link": "xadrez/index.html" },
   { "nome": "Pixel Art", "link": "pixel_art/index.html" },
     { "nome": "Contador de Caracteres", "link": "contador_caracteres/index.html" },
     { "nome": "Cronômetro", "link": "cronometro/index.html" },
