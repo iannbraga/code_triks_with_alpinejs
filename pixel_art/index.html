@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div x-data="pixelArtApp()" class="container">
+    <div x-data="pixelArtApp()" class="container" x-init="init()">
         <h1>Pixel Art Maker</h1>
         <div class="controls">
             <button @click="clearGrid">Limpar Grade</button>
