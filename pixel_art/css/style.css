@@ -1,3 +1,4 @@
+/* css/style.css */
 button {
     padding: 5px 10px;
     margin: 5px;
@@ -35,3 +36,19 @@ button {
     border: 2px solid #000;
   }
   
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff0000;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    display: none;
+}
+
+.toast[x-show="error"] {
+    display: block;
+}

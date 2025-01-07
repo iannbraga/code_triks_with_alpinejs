@@ -1,6 +1,6 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +9,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <div x-data="pixelArtApp()" class="container">
         <h1>Pixel Art Maker</h1>
         <div class="controls">
-            <label>Linhas: <input type="number" x-model="rows" @change="setRows(rows)" min="1" max="100"></label>
-            <label>Colunas: <input type="number" x-model="cols" @change="setCols(cols)" min="1" max="100" readonly disbaled></label>
-            <button @click="generateGrid">Gerar Grade</button>
             <button @click="clearGrid">Limpar Grade</button>
             <button @click="activateEraser" :class="{ active: isEraser }">Borracha</button>
             <button @click="activateDrawing" :class="{ active: !isEraser }">Desenhar</button>
+            <button @click="colorEntireGrid">Colorir Grade</button>
+            <button @click="zoomIn">Zoom In</button>
+            <button @click="zoomOut">Zoom Out</button>
+        </div>
+        <div class="preset-sizes">
+            <button @click="setPresetSize(15, 15)">15x15</button>
+            <button @click="setPresetSize(16, 16)">16x16</button>
+            <button @click="setPresetSize(20, 20)">20x20</button>
+            <button @click="setPresetSize(32, 32)">32x32</button>
+            <button @click="setPresetSize(60, 60)">60x60</button>
+            <button @click="setPresetSize(64, 64)">64x64</button>
         </div>
         <div class="palette">
             <template x-for="color in palette" :key="color">
@@ -30,9 +37,9 @@
         <input type="color" x-model="currentColor" title="Selecionar cor personalizada">
         <div id="canvas-container"></div>
         <button @click="saveImage">Salvar como Imagem</button>
+        <div x-show="error" class="toast">Número de linhas ou colunas inválido</div>
     </div>
 
     <script src="js/script.js"></script>
 </body>
-
 </html>

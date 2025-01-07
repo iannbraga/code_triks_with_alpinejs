@@ -1,25 +1,25 @@
+// js/script.js
 function pixelArtApp() {
     return {
-        rows: 50,
-        cols: 50,
         currentColor: '#000000',
         canvas: null,
         cellColors: [],
         cellSize: null,
         isEraser: false,
+        error: false,
 
         setRows(rows) {
             if (rows < 1 || rows > 100) {
-                console.error("Número de linhas inválido");
+                this.showError("Número de linhas inválido");
                 return;
             }
             this.rows = rows;
             console.log("Linhas: " + this.rows);
         },
-        
+
         setCols(cols) {
             if (cols < 1 || cols > 100) {
-                console.error("Número de colunas inválido");
+                this.showError("Número de colunas inválido");
                 return;
             }
             this.cols = cols;
@@ -27,6 +27,12 @@ function pixelArtApp() {
             if (this.canvas) {
                 this.cellSize = this.canvas.width / this.cols;
             }
+        },
+
+        showError(message) {
+            this.error = true;
+            console.error(message);
+            setTimeout(() => this.error = false, 3000); // Esconde o erro após 3 segundos
         },
 
         palette: [
@@ -101,6 +107,29 @@ function pixelArtApp() {
         selectColor(color) {
             this.currentColor = color;
             this.isEraser = false;
+        },
+
+        colorEntireGrid() {
+            this.cellColors = Array.from({ length: this.rows }, () => Array(this.cols).fill(this.currentColor));
+            if (this.canvas) {
+                this.canvas.redraw();
+            }
+        },
+
+        zoomIn() {
+            this.cellSize = this.cellSize * 1.2;  // Aumenta o tamanho das células em 20%
+            this.canvas.redraw();
+        },
+
+        zoomOut() {
+            this.cellSize = this.cellSize / 1.2;  // Diminui o tamanho das células em 20%
+            this.canvas.redraw();
+        },
+
+        setPresetSize(rows, cols) {
+            this.rows = rows;
+            this.cols = cols;
+            this.generateGrid();
         },
     };
 }
