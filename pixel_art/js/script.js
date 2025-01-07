@@ -163,8 +163,5 @@ function pixelArtApp() {
             this.cols = cols;
             this.generateGrid();
         },
-        init() {
-            this.setPresetSize(16, 16);
-        },
     };
 }
