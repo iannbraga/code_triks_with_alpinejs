@@ -1,13 +1,32 @@
 function pixelArtApp() {
     return {
-        rows: 16,
-        cols: 16,
+        rows: 50,
+        cols: 50,
         currentColor: '#000000',
         canvas: null,
         cellColors: [],
         isEraser: false, // Estado para determinar o modo ativo
+
+        setRows(rows) {
+            if (rows < 1 || rows > 100) {
+                console.error("Número de linhas inválido");
+                return;
+            }
+            this.rows = rows;
+            console.log("Linhas: " + this.rows);
+        },
+        
+        setCols(cols) {
+            if (cols < 1 || cols > 100) {
+                console.error("Número de colunas inválido");
+                return;
+            }
+            this.cols = cols;
+            console.log("Colunas: " + this.cols);
+        },
+
         palette: [
-            '#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF',
+            '#000000', '#FFFFFF', '#FF0000', '#00FF00W', '#0000FF',
             '#FFFF00', '#FF00FF', '#00FFFF', '#800000', '#808000',
             '#008000', '#800080', '#808080', '#C0C0C0', '#FFA500',
             '#A52A2A', '#8B4513', '#40E0D0', '#6495ED', '#DC143C',
@@ -17,6 +36,7 @@ function pixelArtApp() {
             if (this.canvas) {
                 this.canvas.remove();
             }
+            console.log("Row: " + this.rows + " Col: " + this.cols );
 
             // Inicializa o array de cores
             this.cellColors = Array.from({ length: this.rows }, () => Array(this.cols).fill('#FFFFFF'));
@@ -26,7 +46,7 @@ function pixelArtApp() {
 
                 p.setup = () => {
                     const container = document.getElementById('canvas-container');
-                    p.createCanvas(500, 500).parent(container);
+                    p.createCanvas(800, 800).parent(container);
                     cellSize = p.width / this.cols;
                     p.noLoop(); // Desenha a grade apenas uma vez
                 };
