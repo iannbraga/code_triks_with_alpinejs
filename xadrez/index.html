@@ -1,43 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabuleiro de Xadrez</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Xadrez</title>
+    <!-- CSS do Chessboard.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <style>
+        /* Tamanho do tabuleiro */
+        #board1 {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
 </head>
 <body>
-    <div x-data="chessGame()" x-init="init()">
-        <h1>Tabuleiro de Xadrez</h1>
-        <div class="board-container">
-          <div class="labels-vertical">
-            <template x-for="n in 8" :key="n">
-              <div x-text="9 - n"></div>
-            </template>
-          </div>
-          <div class="board">
-            <template x-for="(row, rowIndex) in board" :key="rowIndex">
-              <div class="row">
-                <template x-for="(cell, colIndex) in row" :key="colIndex">
-                  <div 
-                    class="cell" 
-                    :class="{'black': (rowIndex + colIndex) % 2 === 1, 'white': (rowIndex + colIndex) % 2 === 0, 'selected': selectedCell && selectedCell[0] === rowIndex && selectedCell[1] === colIndex}" 
-                    x-text="cell" 
-                    @click="selectCell(rowIndex, colIndex)"
-                  ></div>
-                </template>
-              </div>
-            </template>
-          </div>
-          <div class="labels-horizontal">
-            <template x-for="letter in 'ABCDEFGH'.split('')" :key="letter">
-              <div x-text="letter"></div>
-            </template>
-          </div>
-        </div>
-      </div>
-      
-    <script src="js/script.js"></script>
+    <!-- Tabuleiro de Xadrez -->
+    <div x-data="chessGame()">
+        <div id="board1"></div>
+
+        <!-- Botões para controle do jogo -->
+        <button @click="startNewGame">Iniciar Novo Jogo</button>
+        <button @click="undoMove">Desfazer Movimento</button>
+    </div>
+
+    <!-- Alpine.js e bibliotecas JS -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chess.js@0.10.3/chess.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pgn.js@1.1.1/dist/pgn.min.js"></script>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('chessGame', () => ({
+                board: null, // Tabuleiro do Chessboard.js
+                game: null, // Instância do Chess.js
+                pgn: null, // Instância do Pgn.js para gravar a partida
+
+                // Inicializa o tabuleiro e o jogo
+                init() {
+                    this.game = new Chess(); // Cria uma nova instância do jogo
+                    this.pgn = new Pgn(); // Cria uma nova instância do PGN
+
+                    this.board = ChessBoard('board1', {
+                        draggable: true,
+                        dropOffBoard: 'trash',
+                        sparePieces: true,
+                        onDrop: (source, target) => {
+                            const move = this.game.move({
+                                from: source,
+                                to: target,
+                                promotion: 'q', // Sempre promove para uma dama
+                            });
+
+                            // Se o movimento for legal
+                            if (move === null) return 'snapback';
+                            this.board.position(this.game.fen());
+                            this.onMove(); // Atualiza o PGN
+                        }
+                    });
+                    this.startNewGame(); // Inicia o jogo
+                },
+
+                // Inicia o novo jogo
+                startNewGame() {
+                    this.game.reset(); // Reinicia o estado do jogo
+                    this.board.position(this.game.fen()); // Atualiza o tabuleiro
+                    this.pgn = new Pgn(); // Reseta o histórico de PGN
+                    console.log('Novo Jogo Iniciado');
+                },
+
+                // Desfaz o último movimento
+                undoMove() {
+                    this.game.undo(); // Desfaz o movimento no Chess.js
+                    this.board.position(this.game.fen()); // Atualiza o tabuleiro
+                    console.log('Movimento desfeito');
+                },
+
+                // Atualiza o PGN após cada movimento
+                onMove() {
+                    const pgnMove = this.game.history({ verbose: true }).pop();
+                    const moveStr = `${pgnMove.from}-${pgnMove.to}`;
+                    this.pgn.addMove(moveStr); // Adiciona o movimento ao PGN
+                    console.log(this.pgn.getPGN());
+                }
+            }));
+        });
+    </script>
 </body>
 </html>
