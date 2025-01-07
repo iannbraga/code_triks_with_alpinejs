@@ -5,7 +5,8 @@ function pixelArtApp() {
         currentColor: '#000000',
         canvas: null,
         cellColors: [],
-        isEraser: false, // Estado para determinar o modo ativo
+        cellSize: null,
+        isEraser: false,
 
         setRows(rows) {
             if (rows < 1 || rows > 100) {
@@ -23,6 +24,9 @@ function pixelArtApp() {
             }
             this.cols = cols;
             console.log("Colunas: " + this.cols);
+            if (this.canvas) {
+                this.cellSize = this.canvas.width / this.cols;
+            }
         },
 
         palette: [
@@ -36,32 +40,29 @@ function pixelArtApp() {
             if (this.canvas) {
                 this.canvas.remove();
             }
-            console.log("Row: " + this.rows + " Col: " + this.cols );
+            console.log("Col: " + this.cols + " Lin: " + this.rows);
 
-            // Inicializa o array de cores
             this.cellColors = Array.from({ length: this.rows }, () => Array(this.cols).fill('#FFFFFF'));
 
             this.canvas = new p5((p) => {
-                let cellSize;
-
                 p.setup = () => {
                     const container = document.getElementById('canvas-container');
                     p.createCanvas(800, 800).parent(container);
-                    cellSize = p.width / this.cols;
-                    p.noLoop(); // Desenha a grade apenas uma vez
+                    this.cellSize = p.width / this.cols;
+                    p.noLoop();
                 };
 
                 p.draw = () => {
                     for (let i = 0; i < this.cols; i++) {
                         for (let j = 0; j < this.rows; j++) {
                             p.fill(this.cellColors[j][i]);
-                            p.rect(i * cellSize, j * cellSize, cellSize, cellSize);
+                            p.rect(i * this.cellSize, j * this.cellSize, this.cellSize, this.cellSize);
                         }
                     }
                 };
 
-                p.mousePressed = () => this.fillCell(p, cellSize);
-                p.mouseDragged = () => this.fillCell(p, cellSize);
+                p.mousePressed = () => this.fillCell(p, this.cellSize);
+                p.mouseDragged = () => this.fillCell(p, this.cellSize);
             });
         },
 
@@ -71,7 +72,7 @@ function pixelArtApp() {
 
             if (col >= 0 && row >= 0 && col < this.cols && row < this.rows) {
                 const color = this.isEraser ? '#FFFFFF' : this.currentColor;
-                this.cellColors[row][col] = color; // Atualiza a cor
+                this.cellColors[row][col] = color;
                 p.redraw();
             }
         },
@@ -99,7 +100,7 @@ function pixelArtApp() {
 
         selectColor(color) {
             this.currentColor = color;
-            this.isEraser = false; // Sai do modo borracha ao selecionar uma cor
+            this.isEraser = false;
         },
     };
 }
